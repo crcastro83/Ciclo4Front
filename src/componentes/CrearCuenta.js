@@ -4,6 +4,7 @@ import swal from 'sweetalert';
 import crud from '../conexiones/crud';
 
 const CrearCuenta = () => {
+    
     const navigate = useNavigate();
 
     const [usuario, setUsuario] = useState({

@@ -64,6 +64,11 @@ const Login = () => {
                 })
 
             }else{
+
+                const jwt = response.token
+
+                localStorage.setItem('token', jwt);
+
                 //redireccionar a la pantalla de admin
                 navigate("/admin");
             }
