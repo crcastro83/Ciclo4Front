@@ -10,6 +10,13 @@ const Sidebar = () => {
                 to={"/crear-categorias"}
                 className="bg-violet-600 w-full p-3 text-white uppercase font-bold block mt-5 text-center rounded-lg"
             >Crear Categorias</Link>
+
+            <div className='py-10'>
+            <Link
+                to={"/admin"}
+                className="bg-violet-600 w-full p-3 text-white uppercase font-bold block mt-5 text-center rounded-lg"
+            >Admin Categorias</Link>
+            </div>
         </aside>
     );
 }

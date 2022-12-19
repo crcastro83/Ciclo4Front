@@ -4,38 +4,38 @@ import swal from 'sweetalert';
 import crud from '../conexiones/crud';
 
 const CrearCuenta = () => {
-    
+
     const navigate = useNavigate();
 
     const [usuario, setUsuario] = useState({
-        nombre:'',
-        email:'',
-        password:'',
-        confirmar:''
+        nombre: '',
+        email: '',
+        password: '',
+        confirmar: ''
     })
 
-    const {nombre, email, password, confirmar} = usuario;
+    const { nombre, email, password, confirmar } = usuario;
 
-    const onChange = (e) =>{
+    const onChange = (e) => {
         setUsuario({
             ...usuario,
             [e.target.name]: e.target.value
         })
     }
 
-    const crearCuenta = async () =>{
+    const crearCuenta = async () => {
 
         //los dos password deben ser iguales
-        if (password !== confirmar){
+        if (password !== confirmar) {
             console.log("son diferentes");
             const mensaje = "Las contraseñas son diferentes.";
             swal({
                 title: 'Error',
                 text: mensaje,
                 icon: 'error',
-                buttons:{
-                    confirm:{
-                        Text:'Ok',
+                buttons: {
+                    confirm: {
+                        text: 'OK',
                         value: true,
                         visible: true,
                         className: 'btn btn-danger',
@@ -43,7 +43,7 @@ const CrearCuenta = () => {
                     }
                 }
             })
-        }else{
+        } else {
             const data = {
                 nombre: usuario.nombre,
                 email: usuario.email,
@@ -53,15 +53,15 @@ const CrearCuenta = () => {
 
             const response = await crud.POST('/api/usuarios', data);
             const mensaje = response.msg;
-            if(mensaje === "El usuario ya existe"){
+            if (mensaje === 'El usuario ya existe') {
                 const mensaje = "El usuario ya existe";
                 swal({
                     title: 'Error',
                     text: mensaje,
                     icon: 'error',
-                    buttons:{
-                        confirm:{
-                            Text:'Ok',
+                    buttons: {
+                        confirm: {
+                            text: 'OK',
                             value: true,
                             visible: true,
                             className: 'btn btn-danger',
@@ -69,15 +69,15 @@ const CrearCuenta = () => {
                         }
                     }
                 })
-            }else{
+            } else {
                 const mensaje = "el usuario fue creado correctamente";
                 swal({
                     title: 'Información',
                     text: mensaje,
                     icon: 'success',
-                    buttons:{
-                        confirm:{
-                            Text:'Ok',
+                    buttons: {
+                        confirm: {
+                            text: 'OK',
                             value: true,
                             visible: true,
                             className: 'btn btn-primary',
@@ -87,39 +87,39 @@ const CrearCuenta = () => {
                 });
 
                 setUsuario({
-                    nombre:'',
-                    email:'',
-                    password:'',
-                    confirmar:''
+                    nombre: '',
+                    email: '',
+                    password: '',
+                    confirmar: ''
                 })
 
                 //redireccionar a la pantalla de login
                 navigate("/login");
             }
-        }        
+        }
     }
 
-    const onSubmit = (e) =>{
+    const onSubmit = (e) => {
         e.preventDefault();
         crearCuenta();
     }
-    
+
     return (
 
         <main className='container mx-auto mt-5 md:mt-20 p-5 md:flex md:justify-center'>
             <div className='md:w-2/3 lg:w-2/5'>
-			    <h1 className="inline bg-gradient-to-r from-indigo-200 via-violet-700 to-indigo-200 bg-clip-text font-display text-5xl tracking-tight text-transparent">
+                <h1 className="inline bg-gradient-to-r from-indigo-200 via-violet-700 to-indigo-200 bg-clip-text font-display text-5xl tracking-tight text-transparent">
                     G13 Iniciar sesión Ecommerce 3
                 </h1>
 
-                <form 
+                <form
                     onSubmit={onSubmit}
                     className='my-10 bg-white shadow rounded-lg p-10'
-                    >
+                >
                     <div className='my-5'>
 
                         <label className='uppercase text-gray-600 block text-xl font-bold'>Nombre</label>
-                            <input 
+                        <input
                             type="nombre"
                             id="nombre"
                             name="nombre"
@@ -130,7 +130,7 @@ const CrearCuenta = () => {
                         />
 
                         <label className='uppercase text-gray-600 block text-xl font-bold'>Email</label>
-                        <input 
+                        <input
                             type="email"
                             id="email"
                             name="email"
@@ -141,7 +141,7 @@ const CrearCuenta = () => {
                         />
 
                         <label className='uppercase text-gray-600 block text-xl font-bold'>Password</label>
-                        <input 
+                        <input
                             type="password"
                             id="password"
                             name="password"
@@ -152,7 +152,7 @@ const CrearCuenta = () => {
                         />
 
                         <label className='uppercase text-gray-600 block text-xl font-bold'>Confirmación</label>
-                        <input 
+                        <input
                             type="password"
                             id="confirmar"
                             name="confirmar"
@@ -164,18 +164,18 @@ const CrearCuenta = () => {
                     </div>
 
                     <input
-                            type="submit"
-                            value="Crear Cuenta"
-                            className="bg-violet-600 mb-5 w-full py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-sky-800 transition-colors"
-                        />
+                        type="submit"
+                        value="Crear Cuenta"
+                        className="bg-violet-600 mb-5 w-full py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-violet-400 transition-colors"
+                    />
 
-                        <Link
-                        to={"/login"}
+                    <Link
+                        to={"/"}
                         className="block text-center my-5 text-violet-600 uppercase text-sm"
-                        >Regresar</Link>
+                    >Regresar</Link>
                 </form>
-            </div>            
-        </main> 
+            </div>
+        </main>
     );
 }
 

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import crud from '../conexiones/crud';
+import swal from 'sweetalert';
 
 
 const Admin = () => {
@@ -32,6 +33,30 @@ const Admin = () => {
         cargarCategorias();
     }, [])
 
+    const borrarCategoria = async (idCategoria) => {
+        swal({
+            title: "¿Estas seguro de eliminar esta categoria?",
+            text: "Una vez eliminada, no se podra recuperar esta categoria",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    const response = crud.DELETE(`/api/categoria/${idCategoria}`);
+                    if(response){
+                        swal("la categoria ha sido eliminada correctamente", {
+                            icon: "success",
+                        });
+                    }
+                    cargarCategorias();
+                    
+                } else {
+                    swal("Se ha cancelada la acción");
+                }
+            });
+    }
+
     return (
         <>
             <Header />
@@ -44,7 +69,7 @@ const Admin = () => {
                     <table className="table table-bordered">
                         <thead className='bg-white'>
                             <tr>
-                                <th style={{ width: '10%' }}>Id</th>
+                                <th style={{ width: '10%' }}>Imagen</th>
                                 <th style={{ width: '75%' }}>Nombre</th>
                                 <th style={{ width: '15%' }}>Opciones</th>
                             </tr>
@@ -56,28 +81,26 @@ const Admin = () => {
                                 categoria.map(
                                     item =>
                                         <tr key={item._id}>
-                                            <td>{item._id}</td>
+                                            <td><img src={item.imagen}></img></td>
                                             <td>{item.nombre}</td>
                                             <td>
-                                            </td>
-                                            <td>
-                                                <Link  >crear producto</Link>&nbsp;&nbsp;
-                                                <Link >Editar</Link>&nbsp;&nbsp;
-                                                <button  >Eliminar</button>
+                                                <Link
+                                                    to={`/home-productos/${item._id}`}
+                                                >crear producto</Link>&nbsp;&nbsp;
+                                                <Link
+                                                    to={`/actualizar-categoria/${item._id}`}
+
+                                                >Editar</Link>&nbsp;&nbsp;
+                                                <button
+                                                    onClick={() => borrarCategoria(item._id)}
+                                                >Eliminar</button>
                                             </td>
                                         </tr>
                                 )
                             }
-
-
-                        </tbody>
-                        <tbody>
-
-
                         </tbody>
                     </table>
                 </main>
-
             </div>
         </>
 

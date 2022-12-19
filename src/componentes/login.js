@@ -27,10 +27,10 @@ const Login = () => {
             password: usuario.password
             }
             
-            const response = await crud.POST('/api/auth', data);
+            const response = await crud.POST(`/api/auth`, data);
             const mensaje = response.msg;
             console.log(mensaje);
-            if(mensaje === "El usuario no existe"){
+            if(mensaje === 'El usuario no existe'){
                 const mensaje = "El usuario no existe";
                 swal({
                     title: 'Error',
@@ -38,7 +38,7 @@ const Login = () => {
                     icon: 'error',
                     buttons:{
                         confirm:{
-                            Text:'Ok',
+                            text:'OK',
                             value: true,
                             visible: true,
                             className: 'btn btn-danger',
@@ -46,7 +46,7 @@ const Login = () => {
                         }
                     }
                 })
-            }else if(mensaje === "password incorrecto"){
+            }else if(mensaje === 'password incorrecto'){
                 const mensaje = "password incorrecto";
                 swal({
                     title: 'Error',
@@ -54,7 +54,7 @@ const Login = () => {
                     icon: 'error',
                     buttons:{
                         confirm:{
-                            Text:'Ok',
+                            text:'OK',
                             value: true,
                             visible: true,
                             className: 'btn btn-danger',
@@ -119,7 +119,7 @@ const Login = () => {
                     <input
                             type="submit"
                             value="Iniciar Sesión"
-                            className="bg-violet-600 mb-5 w-full py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-sky-800 transition-colors"
+                            className="bg-violet-600 mb-5 w-full py-3 text-white uppercase font-bold rounded hover:cursor-pointer hover:bg-violet-400 transition-colors"
                         />
 
                         <Link
