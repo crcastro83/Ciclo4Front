@@ -1,8 +1,39 @@
 import React from 'react';
+import swal from 'sweetalert';
+import crud from '../../conexiones/crud';
+import { Link, useParams } from 'react-router-dom';
 
 export const ViewProductos = ({ producto }) => {
 
+    const { idProducto } = useParams();
+    console.log(idProducto);
+
     const { nombre, descripcion, stock, precio, imagen } = producto;
+
+    const borrarProducto = async (idProducto) => {
+        console.log(idProducto);
+        swal({
+            title: "¿Estas seguro de eliminar este producto?",
+            text: "Una vez eliminado, no se podra recuperar este producto",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    const response = crud.DELETE(`/api/producto/${idProducto}`);
+                    if (response) {
+                        swal("el producto ha sido eliminado correctamente", {
+                            icon: "success",
+                        });
+                    }
+                    window.location.reload();
+                } else {
+                    swal("Se ha cancelado la acción");
+                }
+            });
+    }
+
     return (
         <div
             className='border-r p-5 flex justify-between items-center'
@@ -16,16 +47,14 @@ export const ViewProductos = ({ producto }) => {
             </div>
 
             <div className='flex flex-col lg:flex-row gap-2'>
-                <button
-                    className="bg-indigo-600 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
-                //onClick={() => handleModalEditarTarea(tarea)}
-                >Editar</button>
+                <Link
+                    to={`/actualizar-producto/${producto._id}`}
+                >Editar</Link>
                 <button
                     className="bg-red-600 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
-                // onClick={() => handleModalEliminarTarea(tarea)}
+                    onClick={() => borrarProducto(producto._id)}
                 >Eliminar</button>
             </div>
-
         </div>
     )
 }

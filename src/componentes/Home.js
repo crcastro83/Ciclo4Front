@@ -33,7 +33,7 @@ const Home = () => {
         <main className='flex-1'>
             <div className='md:w-2/3 lg:w-2/5 p-10' >
                 <h1 className="inline bg-gradient-to-r from-indigo-200 via-violet-700 to-indigo-200 bg-clip-text font-display text-5xl tracking-tight text-transparent">
-                    Proyecto G13
+                    Pagina de compras Grupo 11
                 </h1>
                 <Link
                     to={"/login"}
@@ -45,9 +45,9 @@ const Home = () => {
             <div className="bg-white">
                 <div className="py-16 sm:py-24 xl:mx-auto xl:max-w-7xl xl:px-8">
                     <div className="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0">
-                        <h2 className="text-2xl font-bold tracking-tight text-gray-900">Shop by Category</h2>
+                        <h2 className="text-2xl font-bold tracking-tight text-gray-900">Categorias disponibles</h2>
                         <a href="#" className="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block">
-                            Browse all categories
+                            Categorias
                             <span aria-hidden="true"> &rarr;</span>
                         </a>
                     </div>
@@ -79,7 +79,7 @@ const Home = () => {
 
                     <div className="mt-6 px-4 sm:hidden">
                         <a href="#" className="block text-sm font-semibold text-indigo-600 hover:text-indigo-500">
-                            Browse all categories
+                            Categorias
                             <span aria-hidden="true"> &rarr;</span>
                         </a>
                     </div>
@@ -89,7 +89,7 @@ const Home = () => {
 
             <div className="bg-gray-500">
                 <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-                    <h2 className="text-xl font-bold text-gray-900">Customers also bought</h2>
+                    <h2 className="text-xl font-bold text-gray-900">Productos</h2>
 
                     <div className="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
                         {productos.map((product) => (

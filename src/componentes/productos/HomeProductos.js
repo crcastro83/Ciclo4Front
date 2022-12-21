@@ -3,9 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import Header from '../Header';
 import Sidebar from '../Sidebar';
 import crud from '../../conexiones/crud';
-import swal from 'sweetalert';
 import ViewProductos from './ViewProductos';
-
 
 const HomeProductos = () => {
 
@@ -31,7 +29,7 @@ const HomeProductos = () => {
         //console.log(response);
         setProductos(response);
     }
-    //console.log(productos);
+    console.log(productos);
     useEffect(() => {
         cargarProductos();
     }, []);
